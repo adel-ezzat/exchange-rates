@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use App\Rate;
 use \Cache;
 
-class everyMinute extends Command
+class rateUpdate extends Command
 {
     /**
      * The name and signature of the console command.
