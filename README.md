@@ -39,6 +39,7 @@ or you can set your server index path to `public` folder to serve it without the
  - `routes/web.php` -  web routes.
  - `app/Console/Commands/rateUpdate.php` - rates renew command.
  - `app/Http/Middleware/VerifyCsrfToken.php` - excluded route from CSRF verification.
+ - `database/migrations/2021_03_04_115327_rates.php` - database migrations.
  - `config/cache` - cache driver config.
  - `.env` - global app configuration.
 
