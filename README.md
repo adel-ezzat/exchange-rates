@@ -30,4 +30,16 @@ or you can set your server index path to `public` folder to serve it without the
  2. memcahe or use  laravel default file cache driver.
  3. API key from [here](https://free.currencyconverterapi.com/) .
 
+## Project Structure
+
+ - `app/http/controllers/Rates.php` - rates controller.
+ -  `app/Rate.php` - rates model.
+ - `resources/views/welcome.php` - home view.
+ - `routes/api.php` -  api routes.
+ - `routes/web.php` -  web routes.
+ - `app/Console/Commands/rateUpdate.php` - rates renew command.
+ - `app/Http/Middleware/VerifyCsrfToken.php` - excluded route from CSRF verification.
+ - `config/cache` - cache driver config.
+ - `.env` - global app configuration.
+
 > by @adelezzatl
