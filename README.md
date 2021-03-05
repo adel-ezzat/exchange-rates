@@ -12,7 +12,7 @@ for Retrieving current exchange rates (vs USD) .
 
  4. configure appURl , database & APIKEY in `.env` file .
 
- 5. configure memecache host & port in `config/cache` ,
+ 5. configure memecached host & port in `config/cache` ,
   if you want laravel default `file cache driver`change
    `'default' => env('CACHE_DRIVER', 'file'),` .
 
@@ -27,7 +27,7 @@ or you can set your server index path to `public` folder to serve it without the
 ## requirements
 
  1. laravel 6 server requirements [here](https://laravel.com/docs/6.x#server-requirements) .
- 2. memcahe or use  laravel default file cache driver.
+ 2. memcached or use laravel default file cache driver.
  3. API key from [here](https://free.currencyconverterapi.com/) .
 
 ## Project Structure
