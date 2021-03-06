@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Rate;
 use \Cache;
+use Artisan;
 
 class Rates extends Controller
 {
@@ -44,8 +45,16 @@ class Rates extends Controller
 
     $convertedAmount = number_format($total, 3, '.', '');
 
-    // get yesterday value 
-    $yesterdayRate = Rate::all()->last()->$currency;
+    // check if there is no rates in DB get will get it from API and save it to DB , incase of the cron not started yet
+    if (Rate::all()->isEmpty()){
+        Artisan::call('rates:update');
+        //yesterday value 
+        $yesterdayRate = Rate::all()->last()->$currency;
+    } else {
+        // yesterday value 
+        $yesterdayRate = Rate::all()->last()->$currency;
+    }
+
 
     // Calculate the percent difference between two numbers
     $percentChange = (1 - $yesterdayRate / $val) * 100;

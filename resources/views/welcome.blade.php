@@ -18,7 +18,7 @@
   <form id="rates">
 
   <div class="form-group">
-    <label for="currency">Curruncy :</label>
+    <label for="currency">Curruncy:</label>
     <select class="form-control" name="currency" id="currency" required>
 
       <option value="eur_usd">Euro</option>
@@ -49,6 +49,7 @@
 
 <script>
 $(function() {
+  // from validation
   $("#rates").validate({
     rules: {
       currency:{ 
@@ -66,7 +67,7 @@ $(function() {
     },
 
     submitHandler: function(form) {
-
+    // POST request
     $.ajax({
                     type: "POST",
                     url: "/api/convert",
@@ -75,21 +76,13 @@ $(function() {
                         'amount':  $( "#amount" ).val(),
                     },
                     success: function (res) {
-
-                        var originalAmount = res.originalAmount;
-                        var originalCurrency = res.originalCurrency;
-                        var exchangeRate = res.exchangeRate;
-                        var exchangeCurrency = res.exchangeCurrency;
-                        var differenceFromYesterday = res.differenceFromYesterday;
+                      // reset HTML contents then append elements
                         $("p").empty();
-                        $("p").append(" <strong>Original Amount</strong> : " + originalAmount + "</br>");
-                        $("p").append(" <strong>Original Currency</strong> : " + originalCurrency + "</br>");
-                        $("p").append(" <strong>Exchange Rate</strong> : " + exchangeRate + "</br>");
-                        $("p").append(" <strong>Exchange Currency</strong> : " + exchangeCurrency + "</br>");
-                        $("p").append(" <strong>Percentage Difference</strong> : " + differenceFromYesterday + " % </br>");
-
-
-
+                        $("p").append(" <strong>Original Amount</strong> : " + res.originalAmount + "</br>");
+                        $("p").append(" <strong>Original Currency</strong> : " + res.originalCurrency + "</br>");
+                        $("p").append(" <strong>Exchange Rate</strong> : " + res.exchangeRate + "</br>");
+                        $("p").append(" <strong>Exchange Currency</strong> : " + res.exchangeCurrency + "</br>");
+                        $("p").append(" <strong>Percentage Difference</strong> : " + res.differenceFromYesterday + " % </br>");
                     }
                 });    
     }
