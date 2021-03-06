@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Carbon\Carbon;
+// use Carbon\CarbonPeriod;
 use App\Rate;
 use \Cache;
 
@@ -41,6 +42,7 @@ class rateUpdate extends Command
     public function handle()
     {
       $apikey = env('CURRCONV_API');
+      $yesterday = Carbon::yesterday()->format('Y-m-d');
 
   /**
    * due to free API limitation, I cant add all currencies,
@@ -63,15 +65,15 @@ class rateUpdate extends Command
     
       foreach ($currencies as $key => $currency) {
      // retrieving an item from the cache, but also store a default value if the requested item doesn't exist
-      $json = Cache::remember($currency, now()->addMinutes(15) , function () use ($currency,$apikey){
-        return $json = file_get_contents("https://free.currconv.com/api/v7/convert?q={$currency}&compact=ultra&apiKey={$apikey}");
+      $json = Cache::remember($currency."_yesterday", now()->addMinutes(15) , function () use ($currency,$yesterday,$apikey){
+        return $json = file_get_contents("https://free.currconv.com/api/v7/convert?q={$currency}&compact=ultra&date={$yesterday}&apiKey={$apikey}");
     });
 
       $obj = json_decode($json, true);
       
       // convert string to uppercase to be able to access the value in the array
       $valUppercase = strtoupper($currency);
-      $val = $obj[$valUppercase];
+      $val = $obj[$valUppercase][$yesterday];
 
       // make an array of currencies values
       array_push($exchangeRates,$val);
