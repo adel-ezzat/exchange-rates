@@ -44,4 +44,4 @@ or you can set your server index path to `public` folder to serve it without the
  - `config/cache` - cache driver config.
  - `.env` - global app configuration.
 
-> by @adelezzatl
+> by @adel-ezzat
